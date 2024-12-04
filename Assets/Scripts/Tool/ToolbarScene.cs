@@ -33,6 +33,7 @@ public class ToolbarScene
         Rect dropdownRect = new Rect(5, 0, 150, 20);
         if (EditorGUI.DropdownButton(dropdownRect, content, FocusType.Keyboard, EditorStyles.toolbarDropDown))
         {
+            
             GenericMenu menu = new GenericMenu();
             MakeSceneMenus(filePath, menu);
             menu.DropDown(dropdownRect);
@@ -51,7 +52,12 @@ public class ToolbarScene
         foreach (var scene in scenes)
         {
 			int dotIndex = scene.LastIndexOf('.');
-			if (dotIndex == -1) continue;
+			if (dotIndex == -1) 
+            {
+                GenericMenu newMenu = new GenericMenu();
+                MakeSceneMenus(scene, newMenu);
+                continue;
+            }
             string substring = scene.Substring(dotIndex);
             if (substring != ".meta")
             {

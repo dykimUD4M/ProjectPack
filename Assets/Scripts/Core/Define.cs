@@ -9,7 +9,14 @@ namespace Core
         private static Camera _mainCamera;
         public static Camera MainCamera
         {
-            get=> _mainCamera;
+            get
+            {
+                if(_mainCamera == null)
+                {
+                    _mainCamera = Camera.main;
+                }
+                return _mainCamera;
+            }
             set=> _mainCamera = value;
         }
     }
